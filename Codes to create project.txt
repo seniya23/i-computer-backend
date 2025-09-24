@@ -19,3 +19,10 @@ Framework           Library
 8. use npm install jsonwebtoken for encrypt and decrypt
 9. gitignore is use for ignore module not need to use in github repositor, ex for this project i have use node_modules in gitignore becuase it has large files and any one need node modules he can download it as npm install.
 10. To give user information to git open cmd and type git config --global user.email "sandullenora23@gmail.com" click enter and type again git config --global user.email "seniya23" click enter 
+11.for connect local git and github cli type "gh auth login" in cmd.
+12.give this options,  Where do you use GitHub? GitHub.com
+  ? What is your preferred protocol for Git operations on this host? HTTPS
+  ? Authenticate Git with your GitHub credentials? Yes
+  ? How would you like to authenticate GitHub CLI? Login with a web browser
+13.open github on browser and type the generated cli 8 digit code  
+14.Next go to the left side git icon and go to CHANGES tab and select ... tab and select Remote
