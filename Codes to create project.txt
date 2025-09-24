@@ -25,4 +25,4 @@ Framework           Library
   ? Authenticate Git with your GitHub credentials? Yes
   ? How would you like to authenticate GitHub CLI? Login with a web browser
 13.open github on browser and type the generated cli 8 digit code  
-14.Next go to the left side git icon and go to CHANGES tab and select ... tab and select Remote
+14.Next go to the left side git icon and go to CHANGES tab and select ... tab and select Remote and add remote that section past the url given from created repository in github and give a publish name,you can refresh and see the all change have updated on github
