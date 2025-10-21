@@ -3,16 +3,24 @@ import mongoose from "mongoose"
 import userRouter from "./routes/userRouter.js"
 import jwt from "jsonwebtoken"
 import productRouter from "./routes/productRouter.js"
+import cors from "cors"
+import dotenv from "dotenv"
 
-const app = express()
+dotenv.config()
 
-const mongoURI = "mongodb+srv://admin:1234@cluster0.5ohbwpd.mongodb.net/seniya?retryWrites=true&w=majority&appName=Cluster0" //after past mongodb connection url add the mongoose library "npm install mongoose@8.10", After install package "import mongoose from "mongoose""", 
+const mongoURI = process.env.MONGO_URL
+
+// const mongoURI = "mongodb+srv://admin:1234@cluster0.5ohbwpd.mongodb.net/seniya?retryWrites=true&w=majority&appName=Cluster0" //after past mongodb connection url add the mongoose library "npm install mongoose@8.10", After install package "import mongoose from "mongoose""", 
                                                                                                                         // and inside this uri cluster name, database name and table names are all included.
 
 mongoose.connect(mongoURI).then(()=> {
     console.log("Connected to MongoDB Cluster")    //the code connection between project and mongodDB cluster, but there have a problem this connection depend on one ip address , 
                                                  // if it change couldn't connect to stop go to "Network Access" in MOngoDB inside the cluster and add ip adress and give "allow acess from anywhere" 
 })                                               //for access with collection need to create sperate connection for that create models folder create student sctructure
+
+const app = express()
+
+app.use(cors())
 
 app.use(express.json()) //This is a middleware to print json request without a middlewhere you can't get and print the json value
 
@@ -32,7 +40,7 @@ app.use((req,res,next) =>{  //next() function is used for handover token to next
         const token = authorizationHeader.replace("Bearer ", "") //here replace token with "Bearer " from empty string (, ""), It's look like this eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlbml5YUBnbWFpbC5jb20iLCJmaXJzdE5
         console.log(token) //next step is decrypt the incrypt code , import jwt from "jsonwebtoken"
 
-        jwt.verify(token, "secretKey96#2025",            //pass token and secrete Key we prapared in userController.js and function for parameter
+        jwt.verify(token, process.env.JWT_SECRET,            //pass token and secrete Key we prapared in userController.js and function for parameter
 
             (error, content)=>{     //decrypt informations are inside the content
                     
@@ -59,10 +67,10 @@ app.use((req,res,next) =>{  //next() function is used for handover token to next
 
 })
 
-app.use("/users",userRouter) //plug userRouter to 5000 port (app.use all are middlewares)
+app.use("/api/users",userRouter) //plug userRouter to 5000 port (app.use all are middlewares)
                             //"/users" is route name that connect to userRouter department with 5000 port, get post put delete reqs are in userRouter.js 
 
-app.use("/products",productRouter)  
+app.use("/api/products",productRouter)  
                       
 app.listen(5000,  ()=>{
 console.log("Srever is running on 5000 port")

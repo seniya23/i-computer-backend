@@ -64,7 +64,7 @@ export function loginUser(req,res){
                         image: user.image 
                     };
 
-                    const token = jwt.sign(payload, "secretKey96#2025", {
+                    const token = jwt.sign(payload, process.env.JWT_SECRET, {
                         expiresIn: "150h" //token expire time
 
                     }) //convert those user data into a token, First give the content(payload) to encrypt for inside sign() and second add a custom secrete key
@@ -73,6 +73,7 @@ export function loginUser(req,res){
                     //matching : isPasswordCorrect
                     
                     massage : "Login successful",
+                    role : user.role,
                     token: token   //pass the token to frot-end, user will received a token like this "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlbml5YUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJzZW5peWEiZGVmYXVsdC5qcGciLCJpYXQiOjE3NTY5Nzk0MDZ9.L2N2oBUDuVPS4XXp4p-shFQbMSpzt00zkU-HLXfWhPk"
                                     //Next step is create a guard room to identify user by the token it is in index.js
 

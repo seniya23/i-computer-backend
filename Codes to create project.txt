@@ -1,6 +1,9 @@
 1.npm init -y for load package.json
+
 2.add "start": "node index.js", inside the script tag in package.json
+
 3.add "type": "module",after the "main": "index.js" tag in package.json
+
 4.npm install express to download express (package-lock.json,node_modules) backend.
 
 5.Dependensies
@@ -15,14 +18,76 @@ Framework           Library
   code to control
 
 6.npm install nodemon to do edits in code while running server, And change this "start": "node index.js" to this "start": "nodemon index.js" in package.json  
+
 7. use npm install bcrypt to install password hashing library
+
 8. use npm install jsonwebtoken for encrypt and decrypt
+
 9. gitignore is use for ignore module not need to use in github repositor, ex for this project i have use node_modules in gitignore becuase it has large files and any one need node modules he can download it as npm install.
+
 10. To give user information to git open cmd and type git config --global user.email "sandullenora23@gmail.com" click enter and type again git config --global user.email "seniya23" click enter 
+
 11.for connect local git and github cli type "gh auth login" in cmd.
+
 12.give this options,  Where do you use GitHub? GitHub.com
   ? What is your preferred protocol for Git operations on this host? HTTPS
   ? Authenticate Git with your GitHub credentials? Yes
   ? How would you like to authenticate GitHub CLI? Login with a web browser
+
 13.open github on browser and type the generated cli 8 digit code  
+
 14.Next go to the left side git icon and go to CHANGES tab and select ... tab and select Remote and add remote that section past the url given from created repository in github and give a publish name,you can refresh and see the all change have updated on github
+
+15.To clone a github repositor go to a new folder and open cmd and type git clone "repositor_URL", to get updates from the owner of that repo is to do, you wil see a down side arrow button and pull button in vs code commit section, click that button you will have updated code.
+
+Front-end................................................................................................
+
+16.Create front-end go to the project folder and open cmd and type "npm create vite@latest"
+
+17.And go through these steps, Ok to proceed? (y) y
+> npx
+> create-vite
+|
+o  Project name:
+|  i-computers-frontend
+|
+o  Select a framework:
+|  React
+|
+o  Select a variant:
+|  JavaScript
+|
+o  Use rolldown-vite (Experimental)?:
+|  No
+|
+o  Install with npm and start now?
+|  No
+|
+o  Scaffolding project in D:\React - Skyrek\i-computers-frontend...
+|
+—  Done. Now run:
+  cd i-computers-frontend
+  npm install
+  npm run dev
+
+18.And run "npm install" terminal to get node_modules
+
+19.Run "npm run dev" in terminal to start the project, use of dev becuase it difined in package.json in script , that's the command to start the project
+
+20.All files runs in App.jxs we can create own tag and call it in the App.jsx to render
+
+21.When accesing back-end thier have a policy to disable for do that type "npm install cors", Next "import cors from "cors" " and plug cors in the top of the prpject back-end file like this 
+    app.use(cors())
+
+22.MongoBd url link is a private secure link that will not disappearing in the git hub as public , to remove it from git hub install "npm install dotenv" 
+   Next create a root folder name .env, And write mongo url like this ex: MONGO_URL="mongodb+srv://admin:1234@cluster0.5ohbwpd.mongodb.net/seniya?retryWrites=true&w=majority&appName=Cluster0" .
+   Next go to the index.js file an import the library as "import dotenv from "dotenv" " ,And next load the data inside .env file to do that type this code  dotenv.config()  
+   And type this code line after that code "const  mongoURI = process.env.MONGO_URL" it means the mogodb url inside .env file load to mongoURI variable. And fianly type .env file in .gitignore file ,
+   So it won't commit to github.
+
+23.Same as the mongodb url the token secret key needs to hide from public, To do that first inside secret key to .env file ex: JWT_SECRET="secretKey96#2025", and change the secret key to this ex: process.env.JWT_SECRET where 
+   the secret key appears,according to this project it appears in index.js and userController.js files.
+
+24.In front-end we don't need to have install dotenv package, it have pre intall package, First create .env file in root folder and add " VITE_BACKEND_URL="http://localhost:5000/api" " your backend url, 
+   change loginpage.jsx file backend url this " await axios.post("http://localhost:500/api/users/login", " to this "await axios.post(import.meta.env.VITE_BACKEND_URL + "/users/login"", After that add .env to .gitignore file     
+ 
