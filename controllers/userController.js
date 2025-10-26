@@ -1,6 +1,8 @@
 import User  from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export function createUser(req,res){
 
@@ -64,7 +66,8 @@ export function loginUser(req,res){
                         image: user.image 
                     };
 
-                    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                    const token = jwt.sign(payload, process.env.JWT_SECRET, {  //make sure to  import dotenv from "dotenv"; , other vise it's value getting null beacuse it's in .env file
+                                                                                                     //dotenv.config();
                         expiresIn: "150h" //token expire time
 
                     }) //convert those user data into a token, First give the content(payload) to encrypt for inside sign() and second add a custom secrete key
