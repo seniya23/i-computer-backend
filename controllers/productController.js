@@ -24,31 +24,47 @@ export function createProduct(req, res) {
 		});
 }
 
-    export function getAllProducts(req, res) {
-	if (isAdmin(req)) {
-		Product.find()
-			.then((products) => {
-				res.json(products);
-			})
-			.catch((error) => {
-				res.status(500).json({
-					message: "Error fetching products",
-					error: error.message,
+
+export async function getAllProducts(req, res) {
+	
+    try {
+		if (isAdmin(req)) {
+			// Product.find()
+			// 	.then((products) => {
+			// 		res.json(products);
+			// 	})
+			// 	.catch((error) => {
+			// 		res.status(500).json({
+			// 			message: "Error fetching products",
+			// 			error: error.message,
+			// 		});
+			// 	});
+
+			// Using async-await
+
+			const products = await Product.find();
+
+			res.json(products);
+		} else {
+			Product.find({ isAvailable: true }) //giving only available products for normal users
+				.then((products) => {
+					res.json(products);
+				})
+				.catch((error) => {
+					res.status(500).json({
+						message: "Error fetching products",
+						error: error.message,
+					});
 				});
-			});
-	} else {
-		Product.find({ isAvailable: true })  //giving only available products for normal users
-			.then((products) => {
-				res.json(products);
-			})
-			.catch((error) => {
-				res.status(500).json({
-					message: "Error fetching products",
-					error: error.message,
-				});
-			});
+		}
+	} catch (error) {
+		res.status(500).json({
+			message: "Error fetching products",
+			error: error,
+		});
 	}
 }
+
 
 
 export function deleteProduct(req,res){
