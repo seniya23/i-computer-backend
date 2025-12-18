@@ -46,7 +46,7 @@ export function loginUser(req,res){
         (users)=>{
             if(users[0] == null){    //if(users[0] == null) says when we use this function  user.find({email : email}) the result should be display as an array inside user details or empty array, so users[0] == null means it does't have a similar user print "User not found"
 
-                res.json({
+                res.status(404).json({
                     massage : "User not found"
                 })
             }else{

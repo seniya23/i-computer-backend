@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import productRouter from "./routes/productRouter.js"
 import cors from "cors"
 import dotenv from "dotenv"
+import orderRouter from "./routes/orderRouter.js"
 
 dotenv.config()
 
@@ -72,6 +73,8 @@ app.use("/api/users",userRouter) //plug userRouter to 5000 port (app.use all are
                             //"/users" is route name that connect to userRouter department with 5000 port, get post put delete reqs are in userRouter.js 
 
 app.use("/api/products",productRouter)  
+
+app.use("/api/orders", orderRouter)
                       
 app.listen(5000,  ()=>{
 console.log("Srever is running on 5000 port")
