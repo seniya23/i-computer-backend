@@ -130,4 +130,31 @@ export function getProductByID(req,res){
 }
 
 
+export async function searchProducts(req,res){
+	const query = req.params.query
+
+	try {
+
+		const products = await Product.find(
+			{
+				$or : [  																		//$or eka pawichchi keranne yata thiyana names or altnames walin ekak match wenna ona nisa, or nathi unoth $and use wenne , ehema unoth search keraddi yata two conditions dekama match wenna one
+					{ name : { $regex : query , $options : "i" } }, 							//$regex is used to search partial text match, $options : "i" is used to ignore case sensitivity, me part eka names galapenna
+					{ altNames : { $elemMatch : { $regex : query , $options : "i" } } } 		//altNames eke athule elements match wenna ona nisa $elemMatch use karanne, me part eka altNames galapenna
+					
+				],
+				isAvailable : true
+			}
+		)
+
+		return res.json(products)
+	}catch(error){
+		res.status(500).json({
+			message : "Error searching products",
+			error : error.message
+		})
+	}
+
+}
+
+
     

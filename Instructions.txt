@@ -89,5 +89,21 @@ o  Scaffolding project in D:\React - Skyrek\i-computers-frontend...
    the secret key appears,according to this project it appears in index.js and userController.js files.
 
 24.In front-end we don't need to have install dotenv package, it have pre intall package, First create .env file in root folder and add " VITE_BACKEND_URL="http://localhost:5000/api" " your backend url, 
-   change loginpage.jsx file backend url this " await axios.post("http://localhost:500/api/users/login", " to this "await axios.post(import.meta.env.VITE_BACKEND_URL + "/users/login"", After that add .env to .gitignore file     
- 
+   change loginpage.jsx file backend url this " await axios.post("http://localhost:500/api/users/login", " to this "await axios.post(import.meta.env.VITE_BACKEND_URL + "/users/login"", After that add .env to .gitignore file    
+
+25.*The first step to create OTP is go to manage google account type app password, Next give name to app and copy the password generated and put it into .env file.
+   *Next install package npm install nodemailer   
+   *Next import nodemailer from "nodemailer";
+   *Next add this code line to configure email,
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: "lenoraseniya@gmail.com",
+            pass: process.env.GMAIL_APP_PASSWORD,
+        },
+    });
+    *Next check sendOTP() function use in userController.js and Otp.js models.
+    

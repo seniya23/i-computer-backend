@@ -1,5 +1,5 @@
 import express from "express";
-import { createProduct, deleteProduct, getAllProducts, getProductByID, updateProduct } from "../controllers/productController.js";
+import { createProduct, deleteProduct, getAllProducts, getProductByID, searchProducts, updateProduct } from "../controllers/productController.js";
 
 const productRouter = express.Router();
 
@@ -12,5 +12,7 @@ productRouter.get("/:productID", getProductByID)
 productRouter.delete("/:productID", deleteProduct)   //always remember to put id routers place in below like this otherwise it will conflict with other routers
 
 productRouter.put("/:productID", updateProduct)
+
+productRouter.get("/search/:query", searchProducts)
 
 export default productRouter
