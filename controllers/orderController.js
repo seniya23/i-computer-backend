@@ -107,7 +107,7 @@ export async function getOrders(req, res) {
 	}
 
 	if (isAdmin(req)) {
-		const orders = await Order.find().sort({ date: -1 }); //latest placed order eka palaweniyata enna haagannawa date: -1 eken
+		const orders = await Order.find().sort({ date: -1 }); //latest placed order eka palaweniyata enna hadagannawa date: -1 eken
 
 		res.json(orders);
 	} else {
@@ -146,5 +146,8 @@ export async function updateOrderStatus(req, res) {
 		});
 	}
 }
+
+//email: req.user.email, (methenedi penewa userge email eka gannawa . eka ganne param request ekakin neme , ee ganne token eka athule thiyana user info welin,
+							//oyata me widihata user ge name last name wage dewal ganna puluwan, methenedi oya front-end eken barrer tocken eka hedder ekata dila beck-end req eka ewanna one.)
 
 
